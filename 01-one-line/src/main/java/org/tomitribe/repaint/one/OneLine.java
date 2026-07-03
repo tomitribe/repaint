@@ -95,6 +95,9 @@ public class OneLine {
      * Run without --pad to see it; with --pad the line is right-padded to a
      * fixed width so the leftover is overwritten with spaces. Overwrite-with-
      * padding (not erase-then-write) is the fix every surveyed renderer uses.
+     *
+     * @param fromSeconds TODO
+     * @param pad TODO
      */
     @Command
     public void countdown(@Out final PrintStream out,
