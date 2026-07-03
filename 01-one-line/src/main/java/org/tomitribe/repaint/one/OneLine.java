@@ -25,6 +25,8 @@ public class OneLine {
     /**
      * What everyone writes first: a new line per update. Run it once to feel
      * the problem every other module in this repo exists to solve.
+     * @param steps TODO
+     * @param intervalMs TODO
      */
     @Command
     public void naive(@Out final PrintStream out,
@@ -38,6 +40,9 @@ public class OneLine {
 
     /**
      * The same progress, on one line. '\r' + overwrite; no newline until done.
+     *
+     * @param width TODO
+     * @param durationSeconds TODO
      */
     @Command
     public void progress(@Out final PrintStream out,
