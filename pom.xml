@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.tomitribe</groupId>
+  <artifactId>repaint-parent</artifactId>
+  <version>0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Repaint :: Parent</name>
+  <description>
+    Live in-place terminal rendering in Java, built up one module at a time.
+    Each module is a standalone CLI that adds one mechanism layer and one
+    lesson; each README starts from the previous module's visible defect.
+    See README.md for the ladder and docs/ for the survey this is built from.
+  </description>
+
+  <modules>
+    <module>01-one-line</module>
+  </modules>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.release>17</maven.compiler.release>
+    <!-- TODO(david): set to your local crest version; crest wiring is yours -->
+    <crest.version>1.0.0</crest.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.tomitribe</groupId>
+        <artifactId>tomitribe-crest</artifactId>
+        <version>${crest.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.tomitribe</groupId>
+        <artifactId>tomitribe-crest-api</artifactId>
+        <version>${crest.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+</project>
