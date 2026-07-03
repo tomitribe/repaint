@@ -24,8 +24,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>17</maven.compiler.release>
-    <!-- TODO(david): set to your local crest version; crest wiring is yours -->
-    <crest.version>1.0.0</crest.version>
+    <crest.version>0.46</crest.version>
   </properties>
 
   <dependencyManagement>
