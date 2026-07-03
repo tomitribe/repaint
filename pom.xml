@@ -19,6 +19,7 @@
 
   <modules>
     <module>01-one-line</module>
+    <module>02-block</module>
   </modules>
 
   <properties>

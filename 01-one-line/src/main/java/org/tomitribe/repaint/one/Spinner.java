@@ -30,7 +30,7 @@ public class Spinner {
         int frame = 0;
         while (System.nanoTime() < end) {
             final double elapsed = (System.nanoTime() - start) / 1_000_000_000d;
-            out.printf("\r%s %s %.1fs", FRAMES[frame], message, elapsed);
+            out.printf("\r%s %s %.1fs", FRAMES[frame], message, elapsed); // \r: cursor to column 0, same row
             out.flush();
             frame = (frame + 1) % FRAMES.length;
             Thread.sleep(intervalMs);

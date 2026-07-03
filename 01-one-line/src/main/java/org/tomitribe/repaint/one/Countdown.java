@@ -33,7 +33,7 @@ public class Countdown {
             if (pad) {
                 line = String.format("%-" + width + "s", line);
             }
-            out.print('\r' + line);
+            out.print('\r' + line); // \r: cursor to column 0, same row
             out.flush();
             Thread.sleep(100);
         }

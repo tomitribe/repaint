@@ -23,7 +23,7 @@ public class Progress {
         final long intervalMs = durationSeconds * 1000L / steps;
         for (int pct = 0; pct <= steps; pct++) {
             final int filled = width * pct / 100;
-            final StringBuilder line = new StringBuilder("\r[");
+            final StringBuilder line = new StringBuilder("\r["); // \r: cursor to column 0, same row
             for (int i = 0; i < width; i++) {
                 line.append(i < filled ? '=' : (i == filled ? '>' : ' '));
             }
