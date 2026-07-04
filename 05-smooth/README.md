@@ -110,15 +110,19 @@ already recorded the frame as painted, so the corrective repaint was
 skipped. Net effect: a missing row, and the shell prompt printed *inside*
 the block where the truncated write stranded the cursor.
 
-Two rules fix it, and they generalize to any renderer with a painter
-thread:
+One rule fixes it, and it generalizes to any renderer with a painter
+thread: **an interrupt may shorten sleeps, never truncate bytes.** A
+frame's write is atomic-or-nothing from the program's side; `Throttle`
+finishes delivery at full speed when interrupted. With that guaranteed,
+the bookkeeping ("I painted X") is always truthful, and the close-time
+paint can trust the normal dirty check — finished state if the ticker
+hadn't shown it yet, zero bytes if it had.
 
-1. **An interrupt may shorten sleeps, never truncate bytes.** A frame's
-   write is atomic-or-nothing from the program's side; `Throttle` now
-   finishes delivery at full speed when interrupted.
-2. **The final frame is forced past the dirty check.** The bookkeeping
-   ("I painted X") and the truth ("X's bytes all left") can disagree at
-   shutdown; one authoritative repaint closes the gap.
+(The first fix for this bug *also* forced the final frame past the dirty
+check — belt and suspenders. The suspenders turned out to cost a
+gratuitous full-block flash at exit on terminals without 2026, and were
+removed once the belt alone provably held. Fix bugs at the source, not at
+the symptom.)
 
 Clean shutdown is part of the frame protocol, not an afterthought.
 

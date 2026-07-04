@@ -121,9 +121,13 @@ public class SmoothRenderer implements Renderer {
     /**
      * Clean shutdown is part of the frame protocol. The interrupt only
      * shortens the painter's SLEEP — Throttle guarantees an in-flight
-     * frame's bytes are never truncated — and the final paint is forced
-     * past the dirty check, because the painter may have recorded a frame
-     * as painted while its bytes were still leaving under interruption.
+     * frame's bytes are never truncated, so the bookkeeping ("I painted X")
+     * is always truthful and the final paint can use the honest dirty
+     * check: it emits the finished state if the ticker hasn't already,
+     * and zero bytes if it has. (An earlier revision forced this paint
+     * past the dirty check — compensation for a truncation bug fixed at
+     * the source, and a gratuitous full-block flash at exit on terminals
+     * without 2026.)
      */
     @Override
     public void close() {
@@ -134,10 +138,7 @@ public class SmoothRenderer implements Renderer {
         } catch (final InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        synchronized (this) {
-            lastLines = List.of(); // force the final frame past the dirty check
-        }
-        paint(); // one final, authoritative frame: the finished state, complete
+        paint(); // final frame: the finished state — or zero bytes if already shown
         out.print(SHOW); // lifetime-hide ends here
         out.flush();
     }
