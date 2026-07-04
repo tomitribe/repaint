@@ -105,7 +105,7 @@ public class Tasks {
 
         void work(final int minSeconds, final int maxSeconds) {
             try {
-                Thread.sleep(ThreadLocalRandom.current().nextLong(minSeconds * 1000L, maxSeconds * 1000L));
+                Thread.sleep(ThreadLocalRandom.current().nextLong(minSeconds * 1000L, maxSeconds * 1000L + 1));
             } catch (final InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
