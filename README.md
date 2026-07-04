@@ -31,7 +31,7 @@ decisions each module implements.
 | [`01-one-line`](01-one-line/) | `\r` + overwrite one status line | escape codes are just strings; overwrite, don't clear; why you must flush | exposes: stale trailing chars on shrink; one line only; piped output is garbage |
 | [`02-block`](02-block/) | fixed multi-line block: cursor-up N, padded rewrite, first-frame latch, shrink-wipe, paint ticker | compose's model: `numLines` accounting, the `ESC[0A` landmine, single-painter concurrency | exposes: flicker, cursor racing, hardcoded size, still garbage when piped |
 | [`03-terminal`](03-terminal/) | isatty + winsize (`stty` exec; FFM `ioctl` lands in 06) + a plain append-only renderer | the seam: renderer chosen by probing the stream you draw on; the model crosses, decoration doesn't | fixes: pipes/CI; introduces the public API shape |
-| `04-width` | one wcwidth-based width function behind all padding/truncation | bytes vs chars vs codepoints vs clusters vs **cells**; Java's `String.length()` trap | fixes: CJK/emoji misalignment (docker's latent bug, reproduced first) |
+| [`04-width`](04-width/) | one wcwidth-based width function behind all padding/truncation + golden-string tests | bytes vs chars vs codepoints vs clusters vs **cells**; Java's `String.length()` trap | fixes: CJK/emoji misalignment (docker's latent bug, reproduced first: `tasks --fit=chars`) |
 | `05-smooth` | whole-frame buffer + single flush, hide-cursor, `?2026`, store-latest coalescing | the anti-flicker checklist; bubbletea's frame-rate/message-rate split | fixes: 02's flicker; fast producers |
 | `06-resize` | SIGWINCH via FFM `sigaction`, height clamp + "… N more", reflow | live resize; why clamping keeps the cursor math valid | fixes: resize corruption |
 

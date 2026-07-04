@@ -21,6 +21,7 @@
     <module>01-one-line</module>
     <module>02-block</module>
     <module>03-terminal</module>
+    <module>04-width</module>
   </modules>
 
   <properties>
