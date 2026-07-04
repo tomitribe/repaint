@@ -25,6 +25,22 @@
     <module>05-smooth</module>
   </modules>
 
+  <profiles>
+    <!-- 06-resize uses FFM (final in Java 22): built only when the JDK
+         running maven is 22+, so a plain Java-17 build still succeeds.
+         Build everything with:
+         JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-25.jdk/Contents/Home mvn clean package -->
+    <profile>
+      <id>jdk22-modules</id>
+      <activation>
+        <jdk>[22,)</jdk>
+      </activation>
+      <modules>
+        <module>06-resize</module>
+      </modules>
+    </profile>
+  </profiles>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>17</maven.compiler.release>

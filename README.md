@@ -33,7 +33,7 @@ decisions each module implements.
 | [`03-terminal`](03-terminal/) | isatty + winsize (`stty` exec; FFM `ioctl` lands in 06) + a plain append-only renderer | the seam: renderer chosen by probing the stream you draw on; the model crosses, decoration doesn't | fixes: pipes/CI; introduces the public API shape |
 | [`04-width`](04-width/) | one wcwidth-based width function behind all padding/truncation + golden-string tests | bytes vs chars vs codepoints vs clusters vs **cells**; Java's `String.length()` trap | fixes: CJK/emoji misalignment (docker's latent bug, reproduced first: `tasks --fit=chars`) |
 | [`05-smooth`](05-smooth/) | whole-frame buffer + single flush, hide-cursor, `?2026`, store-latest + dirty-skip coalescing | the anti-flicker checklist; the message-rate/frame-rate split (`storm` proves it in four numbers) | fixes: 02's flicker; fast producers |
-| `06-resize` | SIGWINCH via FFM `sigaction`, height clamp + "… N more", reflow | live resize; why clamping keeps the cursor math valid | fixes: resize corruption |
+| [`06-resize`](06-resize/) | the FFM native layer (`isatty`, `ioctl(TIOCGWINSZ)`, `sigaction(SIGWINCH)`), height clamp + "… N more", live resize | the native layer is three functions; resize as a push; the never-scroll invariant | fixes: the scrollback grave; stale geometry. **Builds with JDK 22+ only** (see its README) |
 
 Horizon (once the core feels understood): `07-diff` (JLine's per-line
 prefix/suffix diff), `08-input` (raw mode, `/dev/tty`, restore discipline),
