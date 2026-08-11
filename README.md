@@ -34,6 +34,7 @@ decisions each module implements.
 | [`04-width`](04-width/) | one wcwidth-based width function behind all padding/truncation + golden-string tests | bytes vs chars vs codepoints vs clusters vs **cells**; Java's `String.length()` trap | fixes: CJK/emoji misalignment (docker's latent bug, reproduced first: `tasks --fit=chars`) |
 | [`05-smooth`](05-smooth/) | whole-frame buffer + single flush, hide-cursor, `?2026`, store-latest + dirty-skip coalescing | the anti-flicker checklist; the message-rate/frame-rate split (`storm` proves it in four numbers) | fixes: 02's flicker; fast producers |
 | [`06-resize`](06-resize/) | the FFM native layer (`isatty`, `ioctl(TIOCGWINSZ)`, `sigaction(SIGWINCH)`), height clamp + "… N more", live resize | the native layer is three functions; resize as a push; the never-scroll invariant | fixes: the scrollback grave; stale geometry. **Builds with JDK 22+ only** (see its README) |
+| [`06-resize-jline`](06-resize-jline/) | chapter 06 rebuilt on JLine — the adoption experiment | what drops when you adopt (the plumbing: 380 lines, the JDK-22 gate) vs what survives (the design: seam, coalescing, clamp, cursor discipline) | `diff -r 06-resize/src 06-resize-jline/src` is the chapter |
 
 Horizon (once the core feels understood): `07-diff` (JLine's per-line
 prefix/suffix diff), `08-input` (raw mode, `/dev/tty`, restore discipline),

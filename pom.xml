@@ -23,6 +23,8 @@
     <module>03-terminal</module>
     <module>04-width</module>
     <module>05-smooth</module>
+    <module>06-resize</module>
+    <module>06-resize-jline</module>
   </modules>
 
   <profiles>
